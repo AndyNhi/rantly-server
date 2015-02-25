@@ -29,11 +29,27 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "#update" do
-    pending
+    it "returns json of updated user" do
+      user = create_user
+
+      patch :update, id: user, user: {email: 'new@email.com'}
+      expect(response.status).to be(200)
+      response_array = JSON.parse(response.body)
+      expect(response_array["email"]).to eq('new@email.com')
+    end
+
   end
 
   describe "#destroy" do
-    pending
+    it "returns json of deleted user" do
+      user1 = create_user
+
+      delete :destroy, id: user1
+      expect(response.status).to be(200)
+      response_array = JSON.parse(response.body)
+      expect(response_array).to eq("users"=>[])
+    end
+
   end
 
 end
