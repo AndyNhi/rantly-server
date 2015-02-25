@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pp'
 
 RSpec.describe UsersController, type: :controller do
   describe "#index" do
@@ -12,7 +13,19 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "#show" do
-    pending
+    it "returns json of user" do
+      user1 = create_user
+      user2 = create_user
+
+      get :show, id: user1
+      expect(response.status).to be(200)
+      response_array = JSON.parse(response.body)
+      expect(response_array["first_name"]).to eq(user1.first_name)
+
+      get :show, id: user2
+      response_array = JSON.parse(response.body)
+      expect(response_array["first_name"]).to eq(user2.first_name)
+    end
   end
 
   describe "#update" do
