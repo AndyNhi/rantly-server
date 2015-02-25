@@ -9,4 +9,12 @@ module ObjectCreationMethods
     }.merge(overrides))
   end
 
+  def create_rant(overrides = {})
+    Rant.create!({
+      user_id: create_user,
+      title: Faker::Name.title,
+      body: Faker::Lorem.sentence,
+    }.merge(overrides))
+  end
+
 end
