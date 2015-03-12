@@ -29,6 +29,16 @@ RSpec.describe RantsController, type: :controller do
     end
   end
 
+
+  describe '#create' do
+    it "returns json of one user rant" do
+      user = create_user
+      post :create, user_id: user.id , rant: {user_id: user.id, title: "new title", body: "new body"}
+      expect(response.status).to be(200)
+    end
+  end
+
+
   describe '#update' do
     it "returns json of an updated user rant" do
       user = create_user
