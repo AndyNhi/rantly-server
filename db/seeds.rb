@@ -12,7 +12,7 @@ Rant.delete_all
             password_confirmation: "password"
             )
 
-  1.times do
+  10.times do
     Rant.create!(
       user_id: user.id,
       title: Faker::Name.title,
