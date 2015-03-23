@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_filter :authenticate_user_from_token!
   # before_filter :authenticate_user!
+  protect_from_forgery with: :null_session
 
   private
 
@@ -15,7 +16,3 @@ class ApplicationController < ActionController::Base
     end
   end
 end
-
-
-
-# protect_from_forgery with: :null_session
