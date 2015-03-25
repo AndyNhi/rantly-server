@@ -22,7 +22,7 @@ class RantsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:rant][:user_id])
     @rant = Rant.new(rant_params)
     @rant.user_id = @user.id
     if @rant.save
