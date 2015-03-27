@@ -33,8 +33,7 @@ class RantsController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:user_id])
-    @rant = @user.rants.find(params[:id])
+    @rant = Rant.find(params[:id])
     @rant.destroy
     render json: @user.rants.all
   end
