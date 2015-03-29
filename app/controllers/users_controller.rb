@@ -1,19 +1,14 @@
 class UsersController < ApplicationController
+  before_filter :authenticate_user!, only: [:delete]
+  skip_before_filter :verify_authenticity_token
 
   def index
-    if params[:email].present?
-      users = User.where(email: params[:email])
-      render json: users
-    else
-      users = User.all
-      render json: users
-    end
+    render json: User.all
   end
 
   def create
     user = User.new(user_params)
     if user.save
-      sign_in user
       render json: user
     end
   end
@@ -25,7 +20,7 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :email, :password)
   end
 
 end
