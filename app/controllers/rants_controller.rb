@@ -1,9 +1,13 @@
 class RantsController < ApplicationController
 
-
   def index
-    render json: Rant.all
-  end
+     if params[:q].present?
+       @rants = Rant.where("title like ? OR body like ?", "%#{params[:q][:query]}%", "%#{params[:q][:query]}%")
+     else
+       @rants = Rant.all
+     end
+      render json: @rants
+   end
 
   def show
     @user = User.find(params[:user_id])
